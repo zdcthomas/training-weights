@@ -1,12 +1,14 @@
-local plugin = require("plugin_name")
+local tw = require("training_weights")
+
+local mock = require("luassert.mock")
+local stub = require("luassert.stub")
 
 describe("setup", function()
   it("works with default", function()
-    assert("my first function with param = Hello!", plugin.hello())
-  end)
+    local api = mock(vim.api, true)
 
-  it("works with custom var", function()
-    plugin.setup({ opt = "custom" })
-    assert("my first function with param = custom", plugin.hello())
+    tw.retrieve_mapping("w", "n")
+    api.nvim_set_keymap()
+    -- assert("my first function with param = Hello!", tw.hello())
   end)
 end)
